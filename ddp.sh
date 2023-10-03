@@ -7,6 +7,7 @@ while [[ "$#" -gt 0 ]]; do
         --repo) repo="$2"; shift ;;
         --py) py="$2"; shift ;;
         --url) url="$2"; shift ;;
+        --env) pwdenv="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -30,6 +31,8 @@ if [[ -z "$name" || -z "$repo" ]]; then
     exit 1
 fi
 # ~
+# replace ' ' and '_' with '-' in name
+name=$(echo $name | sed -e 's/ /-/g' -e 's/_/-/g')
 userpath="/home/$(whoami)"
 path=${path:-"$userpath/Documents/progra/$name"}
 py=${py:-"python3.11"}
@@ -56,6 +59,8 @@ pwd=$(pwd)
 echo "pwd: $pwd"
 user=$(whoami)
 echo "user: $user"
+
+pwdenv=${pwdenv:-"$pwdd"}
 
 # ---------------------------------   CLONANDO REPO   ---------------------------------
 echo "---------------------------------   CLONANDO REPO   ---------------------------------"
@@ -104,12 +109,12 @@ echo "# Variables de entorno" >> $file_to
 echo "export PYTHONUNBUFFERED=1" >> $file_to
 echo "export DJANGO_SETTINGS_MODULE=""$""DJANGO_SETTINGS_MODULE" >> $file_to
 echo "export PYTHONPATH=""$""DJANGODIR:""$""PYTHONPATH" >> $file_to
-echo "if [ ! -f $pwdd/.env ]; then" >> $file_to
+echo "if [ ! -f $pwdenv/.env ]; then" >> $file_to
 echo "    echo \"Creating .env file...\"" >> $file_to
-echo "    touch $pwdd/.env" >> $file_to
+echo "    touch $pwdenv/.env" >> $file_to
 echo "fi" >> $file_to
-echo "[ ! -f $pwdd/.env ] || export ""$""(grep -v '^#' $pwdd/.env | xargs)" >> $file_to
-echo "cat $pwdd/.env" >> $file_to
+echo "[ ! -f $pwdenv/.env ] || export ""$""(grep -v '^#' $pwdenv/.env | xargs)" >> $file_to
+echo "cat $pwdenv/.env" >> $file_to
 echo "" >> $file_to
 echo "# Crear la carpeta run si no existe para guardar el socket linux" >> $file_to
 echo "RUNDIR=""$""(dirname ""$""SOCKFILE)" >> $file_to
@@ -225,7 +230,7 @@ echo ""
 echo "# Ponga las variables de entorno en:"
 echo "nvim $pwdd/bin/start.sh"
 echo "# O en:"
-echo "nvim $pwdd/.env"
+echo "nvim $pwdenv/.env"
 echo ""
 echo "# Reinicie la app:"
 echo "sudo supervisorctl restart $name"
