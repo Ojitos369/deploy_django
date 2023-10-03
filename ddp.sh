@@ -68,10 +68,11 @@ run_command "git clone $repo ."
 
 # ---------------------------------   ENTORNO VIRTUAL   ---------------------------------
 echo "---------------------------------   ENTORNO VIRTUAL   ---------------------------------"
+run_command "cd $pwdd"
 run_command "$py -m venv venv"
 # command="source venv/bin/activate && pip install -r requirements.txt && pip install gunicorn"
-run_command "source venv/bin/activate"
-run_command "pip install -r requirements.txt"
+run_command "source $pwdd/venv/bin/activate"
+run_command "pip install -r $pwd/requirements.txt"
 run_command "pip install gunicorn"
 
 # ---------------------------------   BASE FILES   ---------------------------------
@@ -103,7 +104,7 @@ echo "echo \"Starting ""$""NAME as `whoami`\"" >> $file_to
 echo "" >> $file_to
 echo "# Activar el entorno virtual" >> $file_to
 echo "cd ""$""DJANGODIR" >> $file_to
-echo "source $pwd/venv/bin/activate " >> $file_to
+echo "source $pwdd/venv/bin/activate " >> $file_to
 echo "" >> $file_to
 echo "# Variables de entorno" >> $file_to
 echo "export PYTHONUNBUFFERED=1" >> $file_to
@@ -121,7 +122,7 @@ echo "RUNDIR=""$""(dirname ""$""SOCKFILE)" >> $file_to
 echo "test -d""$""RUNDIR || mkdir -p ""$""RUNDIR" >> $file_to
 echo "" >> $file_to
 echo "# Iniciar la aplicación django por medio de gunicorn" >> $file_to
-echo "exec $pwd/venv/bin/gunicorn ""$""{DJANGO_WSGI_MODULE}:application \\" >> $file_to
+echo "exec $pwdd/venv/bin/gunicorn ""$""{DJANGO_WSGI_MODULE}:application \\" >> $file_to
 echo "--name ""$""NAME \\""" >> $file_to
 echo "--workers ""$""NUM_WORKERS \\" >> $file_to
 echo "--bind=unix:""$""SOCKFILE \\" >> $file_to
@@ -224,7 +225,7 @@ echo "# alias recomendados:"
 echo "# Restart (iniciales o identificador del proyecto) Django Deploy (ripdd)"
 echo "# Simple Restart (iniciales o identificador del proyecto) Django Deploy (sripdd)"
 echo "# Remplace xx por sus iniciales o identificador del proyecto"
-echo "alias rxxdd='cd $pwd && git pull && source $pwd/venv/bin/activate && pip install -r $pwd/requirements.txt && sudo supervisorctl restart $name'"
+echo "alias rxxdd='cd $pwd && git pull && source $pwdd/venv/bin/activate && pip install -r $pwd/requirements.txt && sudo supervisorctl restart $name'"
 echo "alias srxxdd='sudo supervisorctl restart $name'"
 echo ""
 echo "# Ponga las variables de entorno en:"

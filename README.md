@@ -9,7 +9,27 @@
 * env: Ruta donde se guardara el archivo .env (Por defecto en $path)  
 
 
+## Estructura
+La estructura queda de la siguiente manera
+$path  
+├── $name  
+│   ├── app  
+│   │   ├── (En esta ruta se realiza un "git clone $repo .")  
+│   │   ├── your_code...  
+│   │   ├── requirements.txt  
+│   │   ├── .git/  
+│   ├── logs  
+│   ├── run  
+│   ├── bin  
+│   │   ├── start.sh  
+│   ├── venv  
+  
+> Se requiere que el requirementes este en la raiz del proyecto
+> Para poder configurar el entorno correctamente
+
+
 ## Ejemplo
 ```bash
 ./ddp.sh --name "name" --repo "repo_url.git" --url "dns.dom"
 ```
+
