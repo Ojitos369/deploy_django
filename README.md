@@ -10,7 +10,8 @@
 
 
 ## Estructura
-La estructura queda de la siguiente manera
+La estructura queda de la siguiente manera  
+
 $path  
 ├── $name  
 │   ├── app  
