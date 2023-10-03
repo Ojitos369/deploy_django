@@ -25,7 +25,7 @@ $path
 │   │   ├── start.sh  
 │   ├── venv  
   
-> Se requiere que el requirementes este en la raiz del proyecto
+> Se requiere que el requirements.txt este en la raiz del proyecto
 > Para poder configurar el entorno correctamente
 
 
