@@ -41,7 +41,7 @@ fi
 # ~
 # replace ' ' and '_' with '-' in name
 name=$(echo $name | sed -e 's/ /-/g' -e 's/_/-/g')
-userpath="/home/$(whoami)"
+userpath=$(echo ~)
 path=${path:-"$userpath/Documents/progra/$name"}
 py=${py:-"3.11"}
 py=$(echo $py | sed 's/python//g')

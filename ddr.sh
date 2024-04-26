@@ -33,7 +33,7 @@ fi
 # ~
 # replace ' ' and '_' with '-' in name
 name=$(echo $name | sed -e 's/ /-/g' -e 's/_/-/g')
-userpath="/home/$(whoami)"
+userpath=$(echo ~)
 path=${path:-"$userpath/Documents/progra/$name"}
 url=${url:-""}
                   
@@ -86,14 +86,15 @@ echo "# Elimine los alias de reset si es que existen"
 # ---------------------------------   VARIABLES   ---------------------------------
 # --name - nombre de la app - obligatorio
 
-# --path - ruta donde se aloja el projecto - defecto "/home/$(whoami)/Documents/progra/$name"
+# --path - ruta donde se aloja el projecto - defecto "~/Documents/progra/$name"
 # --url - url del dominio - defecto ""
 
 # ---------------------------------   EJEMPLO   ---------------------------------
 # ./ddr.sh --name "app_name" --url "dns.dom"
-# ./ddr.sh --name "app_name" --path "/home/$(whoami)/Documents/progra/app_name" --url "dns.dom"
+# ./ddr.sh --name "app_name" --path "~/Documents/progra/app_name" --url "dns.dom"
 
 # para obtener el nombre de la app
 # sudo supervisorctl
 # para obtener el url
 # sudo certbot certificates
+
