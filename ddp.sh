@@ -103,6 +103,7 @@ echo "---------------------------------   ENTORNO VIRTUAL   --------------------
 run_command "cd $pwtd"
 path_py_pip=""
 if [ "$conda" == "true" ]; then
+    run_command "conda env remove -n $id -y"
     run_command "conda create -n $id python=$py -y"
     path_py_env=$(conda info --base)/envs/$id
     path_py_pip=$(conda info --base)/envs/$id/bin/pip
