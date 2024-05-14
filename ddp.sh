@@ -296,10 +296,12 @@ echo "sudo certbot --nginx -d $url"
 # --req_file - nombre del archivo requirements.txt - defecto "requirements.txt"
 # --man_path - ruta donde se aloja el archivo manage.py - defecto path/app/
 # --app_name - name de django project (donde se importa settings y wsgi) - defecto "app"
+# --conda - si se usa conda - defecto false
+# --id - iniciales o identificador del proyecto - defecto "xx" (si se usa conda es obligatorio)
 
 # ---------------------------------   EJEMPLO   ---------------------------------
-# ./ddp.sh --name "app_name" --repo "repo_url.git" --url "dns.dom"
-# ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.12" --url "dns.dom" --conda "s" --id "app"
-# ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls"
-# ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls" --conda "s" --id "app"
+# ./ddp.sh --name "name" --repo "repo_url.git" --url "dns.dom"
+# ./ddp.sh --name "name" --repo "repo_url.git" --py "python3.12" --url "dns.dom" --conda "s" --id "app"
+# ./ddp.sh --name "name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls"
+# ./ddp.sh --name "name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls" --conda "s" --id "app"
 # ./ddp.sh --name "me" --repo "git@github.com:Ojitos369/me.git" --py "python3.12" --url "me.ojitos369.com" --conda "s" --id "me"
