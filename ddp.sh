@@ -46,8 +46,7 @@ path=${path:-"$userpath/Documents/progra/$name"}
 py=${py:-"3.11"}
 py=$(echo $py | sed 's/python//g')
 url=${url:-""}
-                  
-                  
+
 echo "name: $name"
 echo "path: $path"
 echo "repo: $repo"
@@ -72,6 +71,7 @@ if [ "$conda" == "true" ]; then
 fi
 
 
+id=${id:-"xx"}
 # ---------------------------------   HACIENDO PATH   ---------------------------------
 echo "---------------------------------   HACIENDO PATH   ---------------------------------"
 rm -rf $path
@@ -265,11 +265,11 @@ echo "# Restart (iniciales o identificador del proyecto) Django Deploy (ripdd)"
 echo "# Simple Restart (iniciales o identificador del proyecto) Django Deploy (sripdd)"
 echo "# Remplace xx por sus iniciales o identificador del proyecto"
 echo "# Reinicio bajando cambios del git y reinstalando los pips del requirements.txt"
-echo "alias prxxdd='cd $pwd && git pull && $path_py_pip install -r $pwdreq/$filereq && sudo supervisorctl restart $name'"
+echo "alias pr""$id""dd='cd $pwd && git pull && $path_py_pip install -r $pwdreq/$filereq && sudo supervisorctl restart $name'"
 echo "# Reinicio solo bajando cambios del git"
-echo "alias rxxdd='cd $pwd && git pull && sudo supervisorctl restart $name'"
+echo "alias r""$id""dd='cd $pwd && git pull && sudo supervisorctl restart $name'"
 echo "# Solo Reinicio del supervisor"
-echo "alias srxxdd='sudo supervisorctl restart $name'"
+echo "alias sr""$id""dd='sudo supervisorctl restart $name'"
 echo ""
 echo "# Ponga las variables de entorno en:"
 echo "nvim $pwtd/bin/start.sh"
@@ -299,5 +299,7 @@ echo "sudo certbot --nginx -d $url"
 
 # ---------------------------------   EJEMPLO   ---------------------------------
 # ./ddp.sh --name "app_name" --repo "repo_url.git" --url "dns.dom"
+# ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.12" --url "dns.dom" --conda "s" --id "app"
 # ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls"
 # ./ddp.sh --name "app_name" --repo "repo_url.git" --py "python3.8" --url "dns.dom" --app_name "polls" --conda "s" --id "app"
+# ./ddp.sh --name "me" --repo "git@github.com:Ojitos369/me.git" --py "python3.12" --url "me.ojitos369.com" --conda "s" --id "me"
