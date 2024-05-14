@@ -101,21 +101,21 @@ run_command "git clone $repo ."
 # ---------------------------------   ENTORNO VIRTUAL   ---------------------------------
 echo "---------------------------------   ENTORNO VIRTUAL   ---------------------------------"
 run_command "cd $pwtd"
+path_py_pip=""
 if [ "$conda" == "true" ]; then
     run_command "conda create -n $id python=$py -y"
-    run_command "conda init"
-    run_command "conda activate $id"
-
     path_py_env=$(conda info --base)/envs/$id
+    path_py_pip=$(conda info --base)/envs/$id/bin/pip
 else
     run_command "python$py -m venv venv"
     run_command "source $pwtd/venv/bin/activate"
     path_py_env="$pwtd/venv"
+    path_py_pip="$pwtd/venv/bin/pip"
 fi
 echo "path_py_env: $path_py_env"
-run_command "pip install --upgrade pip"
-run_command "pip install -r $pwdreq/$filereq"
-run_command "pip install gunicorn"
+run_command "$path_py_pip install --upgrade pip"
+run_command "$path_py_pip install -r $pwdreq/$filereq"
+run_command "$path_py_pip install gunicorn"
 
 # ---------------------------------   BASE FILES   ---------------------------------
 echo "---------------------------------   BASE FILES   ---------------------------------"
@@ -265,11 +265,7 @@ echo "# Restart (iniciales o identificador del proyecto) Django Deploy (ripdd)"
 echo "# Simple Restart (iniciales o identificador del proyecto) Django Deploy (sripdd)"
 echo "# Remplace xx por sus iniciales o identificador del proyecto"
 echo "# Reinicio bajando cambios del git y reinstalando los pips del requirements.txt"
-if [ "$conda" == "true" ]; then
-    echo "alias prxxdd='cd $pwd && git pull && conda init && conda activate $id && pip install -r $pwdreq/$filereq && sudo supervisorctl restart $name'"
-else
-    echo "alias prxxdd='cd $pwd && git pull && source $pwtd/venv/bin/activate && pip install -r $pwdreq/$filereq && sudo supervisorctl restart $name'"
-fi
+echo "alias prxxdd='cd $pwd && git pull && $path_py_pip install -r $pwdreq/$filereq && sudo supervisorctl restart $name'"
 echo "# Reinicio solo bajando cambios del git"
 echo "alias rxxdd='cd $pwd && git pull && sudo supervisorctl restart $name'"
 echo "# Solo Reinicio del supervisor"
