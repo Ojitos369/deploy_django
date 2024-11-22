@@ -121,10 +121,10 @@ run_command "sudo service nginx restart"
 echo "# alias recomendados:"
 echo ""
 echo "# Reinicio bajando cambios del git"
-echo "alias r""$name""dd='cd $pwd && git pull"
+echo "alias r""$name""dd='cd $pwd && git pull && docker compose down && docker-compose up -d"
 echo ""
 echo "# Reinicio rehaciendo la imagen y contenedor"
-echo "alias fr""$name""dd='cd $pwd && docker-compose down && docker image rm "$name"-web && docker-compose up -d"
+echo "alias fr""$name""dd='cd $pwd && docker compose down && docker image rm "$name"-web && docker-compose up -d"
 echo ""
 echo "# Si quiere poner ssl (tener certbot instalado) (sudo snap install --classic certbot && sudo ln -s /snap/bin/certbot /usr/bin/certbot):"
 echo "sudo certbot --nginx -d $url"
@@ -145,4 +145,6 @@ echo "sudo certbot --nginx -d $url"
 # ./ddd.sh --name "name" --repo "repo_url.git" --port "8001" --url "dns.dom"
 
 # ./ddd.sh --name "me" --repo "git@github.com:Ojitos369/me.git" --port "8001" --url "me.ojitos369.com" --files_path "app"
+
+
 
