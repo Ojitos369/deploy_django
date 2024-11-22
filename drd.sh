@@ -1,12 +1,11 @@
 #!/bin/bash
-#Django Deploy Remove
+#Django Remove Docker
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         --name) name="$2"; shift ;;
-        --path) path="$2"; shift ;;
         --url) url="$2"; shift ;;
-        --conda) conda="$2"; shift ;;
+        --path) path="$2"; shift ;;
         --id) id="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
