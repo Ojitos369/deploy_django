@@ -145,6 +145,3 @@ echo "sudo certbot --nginx -d $url"
 # ./ddd.sh --name "name" --repo "repo_url.git" --port "8001" --url "dns.dom"
 
 # ./ddd.sh --name "me" --repo "git@github.com:Ojitos369/me.git" --port "8001" --url "me.ojitos369.com" --files_path "app"
-
-
-
